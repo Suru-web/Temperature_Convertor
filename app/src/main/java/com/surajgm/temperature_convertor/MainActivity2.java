@@ -11,41 +11,41 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     EditText getInput;
-    TextView cel,kel;
+    TextView fah,kel;
     Button convert;
     Float fahrenheit,celcius,kelvin;
-    ImageButton next;
+    ImageButton backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        getInput = findViewById(R.id.enterFahren);
-        cel = findViewById(R.id.celciusText);
-        kel = findViewById(R.id.kelvinText);
+        getInput = findViewById(R.id.enterCel);
+        fah = findViewById(R.id.fahText);
+        kel = findViewById(R.id.kelvinText2);
         convert = findViewById(R.id.convertButton);
-        next = findViewById(R.id.nextButton);
+        backButton = findViewById(R.id.bacButton);
         convert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String input = getInput.getText().toString();
-                fahrenheit = Float.parseFloat(input);
-                celcius = (float) ((fahrenheit-32.0)*(5.0/9.0));
+                celcius = Float.parseFloat(input);
+                fahrenheit = (float) ((celcius*(9.0/5.0))+32);
                 kelvin = celcius + 273;
-                cel.setText(celcius+" "+"\u2103");
-                kel.setText(kelvin+" "+"K");
+                fah.setText(String.valueOf(fahrenheit)+" "+"\u2109");
+                kel.setText(String.valueOf(kelvin)+" "+"K");
             }
         });
-        next.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             }
         });
     }
